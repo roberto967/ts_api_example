@@ -1,4 +1,4 @@
-import seqConection from "./connection";
+import dbConnection from "./connection";
 import Sequelize from "sequelize";
 
 const Op = Sequelize.Op;

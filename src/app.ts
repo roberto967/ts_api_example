@@ -1,4 +1,4 @@
-import express, { Request, Response, Application } from "express";
+import express, { Request, Response, Application, NextFunction } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import helmet from "helmet";
@@ -26,20 +26,30 @@ class App {
 		this.app = express();
 		this.middlewares();
 		this.routes();
+		this.errorHandling();
 	}
 
 	private middlewares(): void {
 		this.app.use(cors(corsOptions));
 		this.app.use(helmet());
 		this.app.use(valResp);
-		this.app.use(bodyParser.json());
-		this.app.use(bodyParser.urlencoded({ extended: true }));
+		this.app.use(express.json());
+		this.app.use(express.urlencoded({ extended: true }));
 	}
 
 	private routes(): void {
 		this.app.get("/", (req: Request, res: Response) => {
 			res.send("Hello World!");
 		});
+	}
+
+	private errorHandling(): void {
+		this.app.use(
+			(err: Error, req: Request, res: Response, next: NextFunction) => {
+				console.error(err.stack);
+				res.status(500).send("Something broke!");
+			}
+		);
 	}
 }
 

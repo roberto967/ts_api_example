@@ -4,7 +4,7 @@ import { Dialect } from "sequelize";
 console.log(process.env.DATABASE_HOST);
 
 const dbConfig = {
-	dialect: "postgres" as Dialect,
+	Dialect: "postgres",
 	host: process.env.DATABASE_HOST,
 	port: parseInt(process.env.DATABASE_PORT ?? "5432"),
 	username: process.env.DATABASE_USER,

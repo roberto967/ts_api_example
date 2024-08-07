@@ -5,9 +5,9 @@ import { DataTypes, Sequelize } from "sequelize";
 	return parseFloat(value);
 };
 
-const connection = new Sequelize(databaseConfig);
+const dbConnection = new Sequelize(databaseConfig);
 
-connection
+dbConnection
 	.authenticate()
 	.then(() => {
 		console.log("Connected to database");
@@ -16,4 +16,4 @@ connection
 		console.error("Error connecting to database", error);
 	});
 
-export default connection;
+export default dbConnection;
